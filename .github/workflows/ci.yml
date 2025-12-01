@@ -1,0 +1,17 @@
+name: First CI pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/Checkout@v3
+
+      - name: Run hello script
+        uses: echo "CI Pipeline executed successfully!"
