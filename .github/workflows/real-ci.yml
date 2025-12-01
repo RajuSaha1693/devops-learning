@@ -48,3 +48,8 @@ jobs:
         with:
           name: demo-app-build
           path: demo-app/
+
+  parallel-job:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Running Two Jobs Together"
