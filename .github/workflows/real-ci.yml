@@ -1,3 +1,4 @@
+#Matrix Build
 name: Real CI Pipeline implementation
 
 on:
@@ -8,6 +9,9 @@ on:
 jobs:
   build-test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 19, 20]
 
     steps:
       - name: Checkout Repository
@@ -16,7 +20,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: ${{ matrix.node-version }}
 
       - name: Install dependency
         run: npm install
@@ -32,5 +36,5 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: demo-app-build
+          name: demo-app-build-${{ matrix.node-version }}
           path: demo-app/
