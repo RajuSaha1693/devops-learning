@@ -23,6 +23,14 @@ jobs:
           node-version: 19
           # node-version: ${{ matrix.node-version }}
 
+      - name: Check Cache
+        uses: actions/cache@v3
+        with:
+          path: ~/ .npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/pack-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
       - name: Install dependency
         run: npm install
         working-directory: demo-app
