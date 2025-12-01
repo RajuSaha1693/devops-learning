@@ -17,4 +17,4 @@ jobs:
         run: echo "CI Pipeline executed successfully!"
 
       - name: Run shell script
-        run: bash module-2-linux/system_information.sh
+        run: bash module-2-linux/system_summary.sh
