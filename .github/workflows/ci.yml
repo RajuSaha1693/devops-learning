@@ -16,5 +16,11 @@ jobs:
       - name: Run hello script
         run: echo "CI Pipeline executed successfully!"
 
-      - name: Run shell script
-        run: bash module-2-linux/system_summary.sh
+      #   - name: Run shell script
+      #     run: bash module-2-linux/system_summary.sh
+
+      - name: Install tree
+        run: sudo apt update & sudo apt install tree -y
+
+      - name: List folder structure
+        run: tree .
