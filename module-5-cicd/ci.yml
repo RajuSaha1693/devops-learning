@@ -15,6 +15,3 @@ jobs:
 
       - name: Run hello script
         run: echo "CI Pipeline executed successfully!"
-
-      - name: Run shell script
-        run: bash module-2-linux/system_information.sh
