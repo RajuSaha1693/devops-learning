@@ -14,4 +14,4 @@ jobs:
         uses: actions/Checkout@v3
 
       - name: Run hello script
-        uses: echo "CI Pipeline executed successfully!"
+        run: echo "CI Pipeline executed successfully!"
