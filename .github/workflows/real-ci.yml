@@ -1,0 +1,36 @@
+name: Real CI Pipeline implementation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependency
+        run: npm install
+        working-directory: demo-app
+
+      - name: Run Linting
+        run: echo "No Linting yet testing the stage"
+
+      - name: Run Test
+        run: npm test -- --ci
+        working-directory: demo-app
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: demo-app-build
+          path: demo-app/
