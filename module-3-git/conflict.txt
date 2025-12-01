@@ -1,1 +1,1 @@
-Testing conflict file
+Testing conflict file from diff branch
