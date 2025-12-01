@@ -24,3 +24,6 @@ jobs:
 
       - name: List folder structure
         run: tree .
+
+      - name: Use Secret
+        run: echo "${{ secrets.MY_SECRET }}"
