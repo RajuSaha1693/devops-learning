@@ -2,9 +2,9 @@
   "name": "docker-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node main.js",
     "build": "echo 'Build step not needed for simple Express app'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

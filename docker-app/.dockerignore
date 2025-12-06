@@ -1,4 +1,10 @@
-# .dockerignore
+# Dependency files
 node_modules
 npm-debug.log
+
+# Development and environment files
 .git
+.gitignore
+.env
+Dockerfile
+README.md
