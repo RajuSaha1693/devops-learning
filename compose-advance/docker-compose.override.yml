@@ -1,0 +1,9 @@
+services:
+  backend:
+    volumes:
+      - ./backend:/app
+    command: ["node", "index.js"]
+
+  frontend:
+    volumes:
+      - ./frontend:/usr/share/nginx/html
