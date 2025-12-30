@@ -1,43 +1,21 @@
-#1. Build stage : Used for installing depenedencies and all .
-FROM node:20-slim AS builder
+#stage 1 : build
+FROM node:18 as build
 
-#set the working directory
 WORKDIR /app
 
-#copy the package.json files required for node application
-COPY package.json package-lock.json ./
+COPY package*.json ./
 
-#install the dependencies use npm ci as it ensure a clean installlation based on package-lock.json
-#--no-optional flag to reduce the image size slightly
-RUN npm ci --no-optional 
-
-#Copy the rest of the application
+RUN npm install
 
 COPY . .
 
-#Build
-#RUN npm run build
+RUN npm run build
 
-#. PRODUCTION STAGE
-FROM node:20-slim AS production
+### stage 2 : serve with nginx
+FROM nginx:alpine
 
-#Security : Create a non-root user and group
-#use a high UID/GID to avoid conflicts
-RUN groupadd -r appgroup && useradd -r -u 10001 -g appgroup appuser
-USER appuser
+COPY --from=build /app/build /usr/share/nginx/html
 
-#Set the working directory
-WORKDIR /usr/src/app
+EXPOSE 80
 
-#COPY only the necessary runtime files from the builder stage
-#1. Production node_modules (which may need to re-installed if the devdependcies where first install)
-#2. Package files 
-#2. application source/build code
-COPY --from=builder --chown=appuser:appgroup /app/package.json /app/package-lock.json ./
-COPY --from=builder --chown=appuser:appgroup /app/node_modules ./node_modules
-COPY --from=builder --chown=appuser:appgroup /app/main.js ./
-
-EXPOSE 3000
-
-CMD ["npm","start"]
-
+CMD ["nginx","-g","daemon off"]
